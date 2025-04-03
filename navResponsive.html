@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Responsive</title>
+    <style>
+        :root {
+            /* --nav-bg-color: #0055FF;
+            --nav-li-color: #ffff;
+            --intro-heading-color: #004D99;
+            --cv-download-bg-color: #0080FF;
+            --cv-download-color: #EDF7FA;
+            --certi-div-bg-color: #00D5FF;
+            --certi-card-bg-color: #ffff; */
+
+            --nav-bg-color: #2c637c;
+            --nav-li-color: #ffff;
+            --intro-heading-color: #004D99;
+            --cv-download-bg-color: #62b0a5;
+            --cv-download-color: #EDF7FA;
+            --certi-div-bg-color: #b1d0ca;
+            --certi-card-bg-color: #ffff;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        nav {
+            width: 100%;
+            height: 70px;
+            background-color: var(--nav-bg-color);
+            color: white;
+            display: flex;
+            position: sticky;
+            top: 0;
+        }
+
+        .darkmode {
+            width: 100px;
+            height: auto;
+            vertical-align: middle;
+            /* background-color: black; */
+        }
+
+        .darkmode {
+            margin-left: 10px;
+            margin-top: 20px;
+            width: 80px;
+            height: 30px;
+        }
+
+        label {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: hsl(0, 0%, 100%);
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.3), inset 0px -5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        label:after {
+            content: '';
+            position: absolute;
+            height: 30px;
+            width: 40px;
+            background: #f2f2f2;
+            border-radius: 100px;
+            /* top: 10px;
+            left: 10px; */
+            transition: 0.5s;
+            box-shadow: 4px 0px 2px rgba(0, 0, 0);
+        }
+
+        input:checked~label:after {
+            left: 5px;
+            transform: translateX(100%);
+            background-color: #3a3a3a;
+            box-shadow: -4px 0px 2px white;
+        }
+
+        input:checked~label {
+            background: #242424;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            background: #fff;
+            z-index: -1;
+            transition: 0.5s;
+        }
+
+        input:checked+label+.background {
+            background: #242424;
+        }
+
+        input {
+            display: none;
+        }
+
+        .navUL {
+            display: flex;
+            flex-direction: left;
+            list-style: none;
+            align-items: right;
+            position: absolute;
+            right: 20px;
+        }
+
+        .navLi {
+            /* position: fixed;
+            left: 0px; */
+            /* margin-left: 50px; */
+            /* padding-left: 25px; */
+            /* padding-right: 25px; */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1em;
+            color: var(--nav-li-color);
+        }
+
+        .navLi a:hover {
+            background-color: #0e2eac;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .navLi a {
+            color: white;
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .dropdown {
+            position: absolute;
+        }
+
+        .dropdown li {
+            display: none;
+        }
+
+        .navUL li:hover>.dropdown li {
+            display: block;
+            margin-left: -30px;
+            margin-top: 20px;
+            color: black;
+            line-height: 1.5em;
+        }
+
+        .dropdown li a {
+            position: relative;
+            /* margin-top: 20px;
+            margin-left: 20px; */
+            color: black;
+            line-height: 1.5em;
+            /* display: inline-block; */
+        }
+
+        .dropdown a:hover {
+            background: none;
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            padding: 5px;
+            /* padding-bottom: 0px;
+            background-color: white;
+            border: none;
+            border-radius: 10px; */
+        }
+
+        .nav-menu-ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .nav-menu-li {
+            padding: 20px;
+            padding-left: 0px;
+        }
+
+        .nav-menu-li a {
+            color: white;
+        }
+
+        .nav-menu-ul {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #242424;
+            height: 100vh;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Responsive Start */
+        @media (max-width: 599.999px) {
+            .navUL {
+                display: none;
+            }
+
+            .nav-menu-ul {
+                display: none;
+            }
+
+            .nav-menu-div:hover~.nav-menu-ul,
+            .nav-menu-ul:hover {
+                display: list-item;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .nav-menu-div {
+                display: none;
+            }
+
+            .nav-menu-ul {
+                display: none;
+            }
+        }
+
+        /* Responsive End */
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="darkmode">
+            <input type="checkbox" id="darkmode-id">
+            <label for="darkmode-id"></label>
+            <div class="darkmode-background"></div>
+        </div>
+        <ul class="navUL">
+            <li class="navLi"><a href="index.html">Home</a></li>
+            <li class="navLi">
+                <a href="project.html">Projects</a>
+                <ul class="dropdown">
+                    <li><a href="project.html">All</a></li>
+                    <li><a href="webCalculator.html">Calculator</a></li>
+                    <li><a href="n5PracticeWeb.html">N5 Practice Web App</a></li>
+                    <li><a href="schoolManagementSystem.html">School Management System</a></li>
+                </ul>
+            </li>
+            <li class="navLi"><a href="certifications.html">Certifications</a></li>
+            <li class="navLi"><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-menu-div">
+            <img class="nav-menu" src="./images/menu.png" alt="">
+        </div>
+        <ul class="nav-menu-ul">
+            <li class="nav-menu-li"><a href="index.html">Home</a></li>
+            <li class="nav-menu-li"><a href="project.html">Projects</a></li>
+            <li class="nav-menu-li"><a href="certifications.html">Certifications</a></li>
+            <li class="nav-menu-li"><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>
