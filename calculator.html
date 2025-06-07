@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="shortcut icon" href="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Calculator-icon.png" type="image/x-icon">
+    <style>
+        .calculator-body {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .container1 {
+            width: 270px;
+            height: auto;
+            background-color: #dfe5ec;
+            box-shadow: 2px 2px 10px rgb(44, 44, 44);
+            border-radius: 5px;
+        }
+
+        .cal-name1 {
+            padding: 15px;
+            padding-bottom: 0px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #02666c;
+        }
+
+        .user-input-data1 {
+            text-align: right;
+            background-color: #dae0e8;
+            width: 260px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 40px;
+            color: #02666c;
+            border: none;
+            font-weight: bold;
+            margin: 5px;
+            box-shadow: 1px 1px 2px rgb(255, 255, 255), -1px -1px 2px rgb(255, 255, 255);
+        }
+
+        .display1 {
+            text-align: right;
+            margin: 15px;
+        }
+
+        .input-keys-container1 {
+            align-content: center;
+            text-align: center;
+        }
+
+        .input-key1 {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 8px;
+            border: none;
+            background-color: #dfe5ec;
+            box-shadow: 1px 1px 3px rgb(121, 121, 121), -2.5px -2.5px 3px white;
+            font-weight: bold;
+            font: rgb(87, 87, 87);
+        }
+
+        .input-key1:active {
+            background-color: white;
+        }
+
+        .function-key1 {
+            color: #00a8b1;
+        }
+
+        .ac1 {
+            color: red;
+        }
+
+        .equal1 {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 50%;
+            border: none;
+            background-color: #00a8b1;
+            box-shadow: 2px 2px 3px rgb(121, 121, 121), -2px -2px 8px white;
+            /* box-shadow: ; */
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            margin-bottom: 25px;
+        }
+
+        .equal1:hover {
+            color: #00a8b1;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body class="calculator-body">
+    <div class="container1">
+        <p class="cal-name1">Calculator</p>
+        <input type="text" id="display1" class="user-input-data1" disabled>
+        <div class="input-keys-container1">
+            <button onclick="clearDisplay()" class="input-key1 ac1" type="button">AC</button>
+            <button onclick="invertValueSign()" class="input-key1 function-key1 +/-" type="button">+/-</button>
+            <button onclick="appendOperator('%')" class="input-key1 function-key1 %" type="button">%</button>
+            <button onclick="appendOperator('/')" class="input-key1 function-key1 /" type="button">/</button>
+            <button onclick="appendNumber('7')" class="input-key1 7" type="button">7</button>
+            <button onclick="appendNumber('8')" class="input-key1 8" type="button">8</button>
+            <button onclick="appendNumber('9')" class="input-key1 9" type="button">9</button>
+            <button onclick="appendOperator('*')" class="input-key1 function-key1 x" type="button">x</button>
+            <button onclick="appendNumber('4')" class="input-key1 4" type="button">4</button>
+            <button onclick="appendNumber('5')" class="input-key1 5" type="button">5</button>
+            <button onclick="appendNumber('6')" class="input-key1 6" type="button">6</button>
+            <button onclick="appendOperator('-')" class="input-key1 function-key1 -" type="button">-</button>
+            <button onclick="appendNumber('1')" class="input-key1 1" type="button">1</button>
+            <button onclick="appendNumber('2')" class="input-key1 2" type="button">2</button>
+            <button onclick="appendNumber('3')" class="input-key1 3" type="button">3</button>
+            <button onclick="appendOperator('+')" class="input-key1 +" type="button">+</button>
+            <button onclick="backspace()" class="input-key1 function-key1 del1" type="button">Del</button>
+            <button onclick="appendNumber('0')" class="input-key1 0" type="button">0</button>
+            <button onclick="appendDot()" class="input-key1 dot1" type="button">.</button>
+            <button onclick="calculateResult()" class="equal1" type="button">=</button>
+        </div>
+    </div>
+    <script>
+        const display1 = document.getElementById('display1');
+        display1.innerText = '';
+
+        function appendNumber(num) {
+            display1.value += num;
+        }
+
+        function appendOperator(op) {
+            if (display1.value === '') return;
+            const lastChar = display1.value.slice(-1);
+            if ('+-*/%'.includes(lastChar)) {
+                display1.value = display1.value.slice(0, -1) + op;
+            } else {
+                display1.value += op;
+            }
+        }
+
+        function appendDot() {
+            const parts = display1.value.split(/[\+\-\*\/%]/);
+            if (!parts[parts.length - 1].includes('.')) {
+                display1.value += '.';
+            }
+        }
+
+        function clearDisplay() {
+            display1.value = '';
+        }
+
+        function backspace() {
+            display1.value = display1.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                let result = eval(display1.value.replace('%', '/100'));
+                if (result === undefined) return;
+                display1.value = result;
+            } catch {
+                display1.value = 'Error';
+            }
+        }
+
+        function invertValueSign() {
+            display1.value = display1.value * -1;
+        }
+    </script>
+</body>
+
+</html>
